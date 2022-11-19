@@ -1,13 +1,9 @@
 <template>
-    <ul>
-      <li
-        v-for="article in articles"
-        :key="article.id"
-      >
-        {{ article.content }}
-        {{ article.createdAt }}
-      </li>
-    </ul>
+  <article class="card">
+    {{ article._id }}
+    {{ article.content }}
+    {{ article.createdAt }}
+  </article>
 </template>
 
 <script>
@@ -16,17 +12,23 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      articles: null,
-      newContent: ''
+      article: {
+        _id: null,
+        content: null,
+        createdAr: null
+      }
     }
   },
   created() {
-    this.getArticles()
+    this.findOneArticle()
   },
   methods: {
-    async getArticles() {
-      const { data } = await axios.get('http://localhost:3009/read')
-      this.articles = data
+    async findOneArticle() {
+      const articleId = this.$route.params.id
+      const { data } = await axios.get(`http://localhost:3009/read/${articleId}`)
+      this.article = {
+        ...data
+      }
     },
   }
 }

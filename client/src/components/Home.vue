@@ -2,10 +2,12 @@
   <ul>
     <li
       v-for="article in articles"
-      :key="article.id"
+      :key="article._id"
     >
-      {{ article.content }}
-      {{ article.createdAt }}
+      <router-link :to="article._id">
+        {{ article.content }}
+        {{ article.createdAt }}
+      </router-link>
     </li>
   </ul>
 </template>
@@ -16,7 +18,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      articles: null,
+      articles: [],
       newContent: ''
     }
   },

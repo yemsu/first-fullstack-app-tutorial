@@ -15,6 +15,13 @@ const articleRead = async (req, res) => {
   res.send(articles)
 }
 
+// FIND ONE
+const articleFindOne = async (req, res) => {
+  const { id } = req.params
+  const article = await Article.findById(id)
+  res.send(article)
+}
+
 // UPDATE
 const articleUpdate = async (req, res) => {
   const { id, content } = req.body
@@ -33,6 +40,7 @@ const articleDelete = async (req, res) => {
 
 module.exports = {
   articleCreate,
+  articleFindOne,
   articleRead,
   articleUpdate,
   articleDelete
