@@ -1,13 +1,19 @@
 const express = require("express")
+const { Article } = require('./api')
 const app = express()
 const POST = 3009
 
-app.unsubscribe(express.json())
+app.use(express.json()) // body parser 를 구현할 수 있다. req.body 접근 가능하게 됨.
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-  res.send("Success")
+  res.send("full stack app is running")
 })
+
+app.post('/create', Article.articleCreate)
+app.get('/read', Article.articleRead)
+app.patch('/update', Article.articleUpdate)
+app.delete('/delete/:id', Article.articleDelete)
 
 app.listen(POST, "localhost", () => {
   console.log(`App listening at http://localhost:${POST}`)
