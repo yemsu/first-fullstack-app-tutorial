@@ -18,8 +18,10 @@ const articleRead = async (req, res) => {
 // UPDATE
 const articleUpdate = async (req, res) => {
   const { id, content } = req.body
-  const updatedArticle = await model.Article.findByIdAndUpdate(id, { content })
-  res.send(updatedArticle) // 변경 전 값 리턴됨.
+  const updatedArticle = await model.Article.findByIdAndUpdate(id, { content }, {
+    returnDocument: 'after' // 변경된 값 리턴하도록 옵션 설정.
+  })
+  res.send(updatedArticle) 
 }
 
 // DELETE
