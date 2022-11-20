@@ -25,7 +25,7 @@ export default {
   methods: {
     async findOneArticle() {
       const articleId = this.$route.params.id
-      const { data } = await axios.get(`http://localhost:3009/read/${articleId}`)
+      const { data } = await axios.get(`${process.env.API_URL}/read/${articleId}`)
       this.article = {
         ...data
       }

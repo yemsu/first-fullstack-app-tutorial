@@ -61,7 +61,7 @@ export default {
     async deleteArticle(articleId) {
       const confirmDelete = confirm('삭제하시겠습니까?')
       if(!confirmDelete) return
-      const { data, status } = await axios.delete(`http://localhost:3009/delete/${articleId}`)
+      const { data, status } = await axios.delete(`${process.env.API_URL}/delete/${articleId}`)
       
       if(status ===  200) {
         alert('삭제되었습니다!', )
