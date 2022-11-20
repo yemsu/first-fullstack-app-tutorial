@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     async getArticles() {
-      const { data } = await axios.get(`${process.env.API_URL}/read`)
+      const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/read`)
       this.articles = data
     },
     async createArticle() {
@@ -47,7 +47,7 @@ export default {
         alert('글을 작성해 주세요')
         return
       }
-      const { data, status } = await axios.post(`${process.env.API_URL}/create`, {
+      const { data, status } = await axios.post(`${process.env.VUE_APP_API_URL}/create`, {
         content: this.newArticle
       })
       if(status ===  200) {
