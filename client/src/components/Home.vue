@@ -11,6 +11,7 @@
             {{ article.content }}
             {{ article.createdAt }}
           </router-link>
+          <button @click="deleteArticle(article._id)">삭제</button>
         </li>
       </ul>
     </section>
@@ -56,6 +57,20 @@ export default {
         return
       }
       alert('등록에 실패했습니다. status code: ', status)
+    },
+    async deleteArticle(articleId) {
+      const confirmDelete = confirm('삭제하시겠습니까?')
+      if(!confirmDelete) return
+      const { data, status } = await axios.delete(`http://localhost:3009/delete/${articleId}`)
+      
+      if(status ===  200) {
+        alert('삭제되었습니다!', )
+        console.log(data)
+        this.articles = this.articles.filter(article => article._id !== data._id)
+        return
+      }
+      alert('등록에 실패했습니다. status code: ', status)
+      console.log(articleId)
     }
   }
 }
